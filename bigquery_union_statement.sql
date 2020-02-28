@@ -111,3 +111,9 @@ union all
 select * from `fh-bigquery.reddit_comments.2019_08` where subreddit = 'politics'
 union all
 select * from `fh-bigquery.reddit_comments.2019_09` where subreddit = 'politics';
+
+
+#Select only bot comments from all comments
+SELECT *
+FROM `politics.politics_all` as a
+WHERE a.author IN (SELECT bot_accts FROM `banned_accts.botaccts`);
