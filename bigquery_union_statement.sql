@@ -115,5 +115,5 @@ select * from `fh-bigquery.reddit_comments.2019_09` where subreddit = 'politics'
 
 #Select only bot comments from all comments
 SELECT *
-FROM `politics.politics_all` as a
-WHERE a.author IN (SELECT bot_accts FROM `banned_accts.botaccts`);
+FROM `reddit.politics_comments` as a
+WHERE a.author IN (SELECT bot_accts FROM `reddit.botaccts`);
