@@ -11775,7 +11775,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 align=center><font size = 5>Identifying Social Media Interference Campaigns</font></h1>
+<h1 align=center><font size = 5>Big Data NLP with Reddit r/Politics</font></h1>
 </div>
 </div>
 </div>
@@ -11806,6 +11806,23 @@ div#notebook {
 <li><a href="#1">Data Preprocessing</a><br></li>
 <li><a href="#2">Visualizing Data</a><br></li>
 <li><a href="#3">Modeling</a><br></li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Data Sources:</p>
+<ol>
+<li>Bigquery public dataset of Reddit comments from Jan 2015 to Sept 2019.</li>
+<li>Suspicious accounts banned by Reddit were extracted these reports.
+<a href="https://www.reddit.com/r/announcements/comments/8bb85p/reddits_2017_transparency_report_and_suspect/">2017 Transparency Report</a>, 
+<a href="https://www.reddit.com/r/redditsecurity/comments/e74nml/suspected_campaign_from_russia_on_reddit/">2019 Announcement</a></li>
+<li>Pushshift prescraped data of Reddit user information - updated Sept 2018.</li>
+<li>Reddit API pulled user data of banned accounts not included in Pushshift data. (see Reddit_User_API_Scraper.ipynb)</li>
 </ol>
 
 </div>
@@ -12705,6 +12722,7 @@ div#notebook {
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml.feature</span> <span class="k">import</span> <span class="n">HashingTF</span><span class="p">,</span> <span class="n">Tokenizer</span><span class="p">,</span> <span class="n">StopWordsRemover</span><span class="p">,</span> <span class="n">IDF</span><span class="p">,</span> <span class="n">StringIndexer</span>
 <span class="kn">from</span> <span class="nn">pyspark.ml</span> <span class="k">import</span> <span class="n">Pipeline</span>
 
+<span class="c1">#Set up pipeline</span>
 <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="s2">&quot;body_vec&quot;</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;body_vec_token&quot;</span><span class="p">)</span>
 <span class="n">remover</span> <span class="o">=</span> <span class="n">StopWordsRemover</span><span class="p">(</span><span class="n">inputCol</span> <span class="o">=</span> <span class="s2">&quot;body_vec_token&quot;</span><span class="p">,</span> <span class="n">outputCol</span> <span class="o">=</span> <span class="s2">&quot;body_vec_token_nosw&quot;</span><span class="p">)</span>
 <span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemming</span><span class="p">(</span><span class="n">inputCol</span> <span class="o">=</span> <span class="s2">&quot;body_vec_token_nosw&quot;</span><span class="p">,</span> <span class="n">outputCol</span> <span class="o">=</span> <span class="s2">&quot;body_vec_cleaned&quot;</span><span class="p">)</span>
@@ -12847,6 +12865,15 @@ Wall time: 5min 52s
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="User-Posts">User Posts<a class="anchor-link" href="#User-Posts">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Basic bar plot showing number of user posts leading up to 2016 election</p>
+
 </div>
 </div>
 </div>
@@ -13019,6 +13046,15 @@ only showing top 20 rows
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Word-Cloud">Word Cloud<a class="anchor-link" href="#Word-Cloud">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Visualize most comment words among users in April 2015/2016 and November 2015/2016. There is a clear trend towards discussion about presidential candidates in 2016. There is also an interesting distincition between the most comment terms used by normal users and those of banned accounts.</p>
+
 </div>
 </div>
 </div>
@@ -13650,7 +13686,8 @@ time to run: 2519.104952096939
 <div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Turn off Join threshold because it was timing out the multiclassmetrics function</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13735,6 +13772,15 @@ recall of banned class: 0.0
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Based on the business problem we are most interested in boosting recall because these models should be used as a screening method to flag comments for further human reviewe.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[41]:</div>
@@ -13792,6 +13838,15 @@ recall of banned class: 0.0
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lowering threshold to be labeled as a suspicious account to include 0.01% of top probability comments. Chose 0.01% because if we assume that there are around 1 million comments posted to the politics subreddit every month, this would equate to 100 flagged comments which is a manageable size for the 10 person moderation team.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -14143,6 +14198,15 @@ recall of banned class: 0.0
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Repeating above step by lowering threshold for classification.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[62]:</div>
@@ -14304,6 +14368,17 @@ recall of banned class: 0.38095238095238093
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Results-and-Future-Work">Results and Future Work<a class="anchor-link" href="#Results-and-Future-Work">&#182;</a></h1><p>By lowering the threshold for random forest classification we were able to boost recall from 0% to 38%, which is much better than the logistic regression.</p>
+<p>As an anomaly detection problem, this was quite a difficult problem to tackle. Distinguishing ‘bots’ from far-left or far-right users was difficult with less sophisticated models as the accounts were used by actual people mimicking similar speech patterns.  Having the funds to source stronger processing tools could improve both the amount of data and time of process necessary for this project.</p>
+<p>To reduce the data size, we tackled specifically the r/Politics subreddit, whereas many ‘bots’ post across all of Reddit. In future work, accounting for these other subreddits (=significantly larger data) could provide a much stronger dataset for increasing prediction accuracy.</p>
+
+</div>
+</div>
 </div>
     </div>
   </div>
