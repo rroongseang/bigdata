@@ -13776,7 +13776,7 @@ recall of banned class: 0.0
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Based on the business problem we are most interested in boosting recall because these models should be used as a screening method to flag comments for further human reviewe.</p>
+<p>Based on the business problem we are most interested in boosting recall because these models should be used as a screening method to flag comments for further human review.</p>
 
 </div>
 </div>
@@ -13985,6 +13985,15 @@ recall of banned class: 0.0
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Logistic regression on user comments does not appear to be a good model for identifying suspicious account activity. This is likely due to the model being trained on uni-grams and not generalizing well on the test set.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -14373,7 +14382,7 @@ recall of banned class: 0.38095238095238093
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Results-and-Future-Work">Results and Future Work<a class="anchor-link" href="#Results-and-Future-Work">&#182;</a></h1><p>By lowering the threshold for random forest classification we were able to boost recall from 0% to 38%, which is much better than the logistic regression.</p>
+<h1 id="Results-and-Future-Work">Results and Future Work<a class="anchor-link" href="#Results-and-Future-Work">&#182;</a></h1><p>By lowering the threshold for random forest classification we were able to boost recall from 0% to 38%, which is much better than the logistic regression results.</p>
 <p>As an anomaly detection problem, this was quite a difficult problem to tackle. Distinguishing ‘bots’ from far-left or far-right users was difficult with less sophisticated models as the accounts were used by actual people mimicking similar speech patterns.  Having the funds to source stronger processing tools could improve both the amount of data and time of process necessary for this project.</p>
 <p>To reduce the data size, we tackled specifically the r/Politics subreddit, whereas many ‘bots’ post across all of Reddit. In future work, accounting for these other subreddits (=significantly larger data) could provide a much stronger dataset for increasing prediction accuracy.</p>
 
